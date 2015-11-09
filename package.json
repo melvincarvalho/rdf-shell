@@ -1,0 +1,35 @@
+{
+  "name": "rdf-shell",
+  "version": "0.0.1",
+  "description": "utils for gitpay.org and related systems",
+  "main": "rdf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melvincarvalho/rdf-shell/"
+  },
+  "keywords": [
+    "rdf",
+    "shell",
+    "solid",
+    "webid",
+    "linked",
+    "data"
+  ],
+  "author": "Melvin Carvalho <melvincarvalho@gmail.com> (http://melvincarvalho.com/#me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melvincarvalho/rdf-shell/issues"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "git-config": "0.0.7",
+    "node-forge": "^0.6.34",
+    "rdflib": "^0.2.10"
+  },
+  "bin": {
+    "git-pay": "rdf.js"
+  }
+}

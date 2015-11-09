@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-/*
+/**
 * rdf calls child script
 *
 * @param {string} argv[2] command
 * @callback {bin~cb} callback
-**/
+*/
 function rdf(argv, callback) {
   var command = argv[2];
   var exec;
@@ -22,10 +22,10 @@ function rdf(argv, callback) {
 
 }
 
-/*
+/**
 * rdf as a command
 *
-**/
+*/
 function bin() {
   rdf(process.argv, function(err, res){
     console.log(res);
