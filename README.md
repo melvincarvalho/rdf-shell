@@ -11,7 +11,7 @@ rdf shell
 
 ```
     commands
-      cat <uri>                    - displays a file
-      help                         - shows help message
-      ls <uri>                     - shows files in a container
+      rdf cat <uri>                    - displays a file
+      rdf help                         - shows help message
+      rdf ls <uri>                     - shows files in a container
 ```
