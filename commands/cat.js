@@ -8,7 +8,10 @@ var util = require ('./util.js');
 */
 function cat(argv, callback) {
   util.getAll(process.argv[2], function(err, val) {
-   console.log(val);
+    var g = $rdf.graph();
+    var sz = $rdf.Serializer(g);
+    documentString = sz.statementsToN3(val);
+    console.log(documentString);
   });
 }
 
