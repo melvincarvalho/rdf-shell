@@ -8,9 +8,10 @@
 function help(argv, callback) {
   var ret = 'rdf help\n';
   ret += 'commands\n';
-  ret += '  cat <uri>                    - displays a file\n';
-  ret += '  help                         - shows help message\n';
-  ret += '  ls <uri>                     - shows files in a container\n';
+  ret += '  rdf cat <uri>                    - displays a uri\n';
+  ret += '  rdf help                         - shows help message\n';
+  ret += '  rdf ls <uri>                     - shows files in a container\n';
+  ret += '  rdf put <uri> <data>             - puts turtle data to a file\n';
   callback(null, ret);
 }
 
