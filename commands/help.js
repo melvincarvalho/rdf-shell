@@ -11,7 +11,9 @@ function help(argv, callback) {
   ret += '  rdf cat <uri>                    - displays a uri\n';
   ret += '  rdf help                         - shows help message\n';
   ret += '  rdf ls <uri>                     - shows files in a container\n';
+  ret += '  rdf patch <uri> <data>           - patch turtle data to a file\n';
   ret += '  rdf put <uri> <data>             - puts turtle data to a file\n';
+  ret += '  rdf rm <uri>                     - removes a uri\n';
   callback(null, ret);
 }
 

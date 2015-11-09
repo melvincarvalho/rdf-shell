@@ -44,7 +44,7 @@ function getAll(URI, callback) {
 
 
 /**
- * putStorage Sends turtle data to remote storage
+ * putStorage Sends turtle data to remote storage via put request
  * @param  {String}   host     The host to send to
  * @param  {String}   path     The path relative to host
  * @param  {String}   data     The turtle to send
@@ -90,6 +90,110 @@ function putStorage(host, path, data, cert, callback) {
   put.end();
 }
 
+/**
+ * patchStorage Sends turtle data to remote storage via patch request
+ * @param  {String}   host     The host to send to
+ * @param  {String}   path     The path relative to host
+ * @param  {String}   data     The turtle to send
+ * @param  {String}   cert     Certificate path used for auth
+ * @param  {Function} callback Callback with error or response
+ */
+function patchStorage(host, path, data, cert, callback) {
+  var protocol = 'https://';
+
+  var ldp = {
+    hostname: host,
+    rejectUnauthorized: false,
+    port:     443,
+    method:   'PATCH',
+    headers:  {'Content-Type': 'application/sparql-update'}
+  };
+
+  if (cert) {
+    ldp.key = fs.readFileSync(cert);
+    ldp.cert = fs.readFileSync(cert);
+  }
+
+  // put file to ldp
+  ldp.path = path;
+  debug('sending to : ' + protocol + host + path);
+  var put = https.request(ldp, function(res) {
+    chunks = '';
+    debug('STATUS: ' + res.statusCode);
+    debug('HEADERS: ' + JSON.stringify(res.headers));
+    res.on('data', function (chunk) {
+      chunks += chunk;
+    });
+    res.on('end', function (chunk) {
+      callback(null, chunks);
+    });
+  });
+
+  put.on('error', function(e) {
+    callback(e);
+  });
+
+  put.write(data);
+  put.end();
+}
+
+/**
+ * deleteStorage Sends turtle data to remote storage via delete request
+ * @param  {String}   host     The host to send to
+ * @param  {String}   path     The path relative to host
+ * @param  {String}   cert     Certificate path used for auth
+ * @param  {Function} callback Callback with error or response
+ */
+function deleteStorage(host, path, cert, callback) {
+  var protocol = 'https://';
+
+  var ldp = {
+    hostname: host,
+    rejectUnauthorized: false,
+    port:     443,
+    method:   'PUT',
+    headers:  {'Content-Type': 'text/turtle'}
+  };
+
+  if (cert) {
+    ldp.key = fs.readFileSync(cert);
+    ldp.cert = fs.readFileSync(cert);
+  }
+
+  // put file to ldp
+  ldp.path = path;
+  debug('sending to : ' + protocol + host + path);
+  var put = https.request(ldp, function(res) {
+    chunks = '';
+    debug('STATUS: ' + res.statusCode);
+    debug('HEADERS: ' + JSON.stringify(res.headers));
+    res.on('data', function (chunk) {
+      chunks += chunk;
+    });
+    res.on('end', function (chunk) {
+      callback(null, chunks);
+    });
+  });
+
+  put.on('error', function(e) {
+    callback(e);
+  });
+
+  put.end();
+}
+
+function patch(uri, data, callback){
+  var a = url.parse(uri);
+  //console.log(a);
+  patchStorage(a.host, a.path, data, null, callback);
+}
+
+function rm(uri, callback){
+  var a = url.parse(uri);
+  //console.log(a);
+  deleteStorage(a.host, a.path, null, callback);
+}
+
 function put(uri, data, callback){
   var a = url.parse(uri);
   //console.log(a);
@@ -99,5 +203,7 @@ function put(uri, data, callback){
 module.exports = {
   getAll      : getAll,
   getAny      : getAny,
-  put         : put
+  put         : put,
+  rm          : rm,
+  patch       : patch
 };
