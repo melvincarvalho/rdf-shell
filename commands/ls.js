@@ -14,12 +14,12 @@ function ls(argv, callback) {
       if (val[i].predicate.uri === 'http://www.w3.org/ns/ldp#contains') {
         if (! res[val[i].object.uri]) res[val[i].object.uri] = {};
         res[val[i].object.uri].contains = val[i].object.uri;
-        console.log(val[i].object.uri);
+        //console.log(val[i].object.uri);
       }
       if (val[i].predicate.uri === 'http://www.w3.org/ns/posix/stat#mtime') {
         if (! res[val[i].subject.uri]) res[val[i].subject.uri] = {};
         res[val[i].subject.uri].mtime = val[i].object.value;
-        console.log(val[i].object.value);
+        //console.log(val[i].object.value);
       }
 
     }
@@ -31,7 +31,7 @@ function ls(argv, callback) {
       }
     }
 
-    console.log(arr);
+    //console.log(arr);
 
 
     arr = arr.sort(function(a, b){
