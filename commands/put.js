@@ -1,6 +1,7 @@
 var util = require ('./util.js');
 
 
+
 /**
 * put gets list of files for a given container
 *
@@ -9,6 +10,16 @@ var util = require ('./util.js');
 * @callback {bin~cb} callback
 */
 function put(argv, callback) {
+  if (!argv[2]) {
+    console.error("url is required");
+    console.error("Usage : put <url> <data>");
+    process.exit(-1);
+  }
+  if (!argv[3]) {
+    console.error("data is required");
+    console.error("Usage : put <url> <data>");
+    process.exit(-1);
+  }
   util.put(argv[2], argv[3], function(err, val) {
     if (!err) {
       console.log('PUT to : ' + argv[2]);
