@@ -1,8 +1,8 @@
-$rdf = require('rdflib');
+$rdf       = require('rdflib');
 var debug  = require('debug')('rdf-util');
-var url = require('url');
-var https = require('https');
-
+var url    = require('url');
+var https  = require('https');
+var fs     = require("fs");
 
 var CHAT  = $rdf.Namespace("https://ns.rww.io/chat#");
 var CURR  = $rdf.Namespace("https://w3id.org/cc#");
@@ -184,20 +184,19 @@ function deleteStorage(host, path, cert, callback) {
 
 function patch(uri, data, callback){
   var a = url.parse(uri);
-  //console.log(a);
-  patchStorage(a.host, a.path, data, null, callback);
+  patchStorage(a.host, a.path, data, process.env.CERT, callback);
 }
 
 function rm(uri, callback){
   var a = url.parse(uri);
   //console.log(a);
-  deleteStorage(a.host, a.path, null, callback);
+  deleteStorage(a.host, a.path, process.env.CERT, callback);
 }
 
 function put(uri, data, callback){
   var a = url.parse(uri);
   //console.log(a);
-  putStorage(a.host, a.path, data, null, callback);
+  putStorage(a.host, a.path, data, process.env.CERT, callback);
 }
 
 module.exports = {
