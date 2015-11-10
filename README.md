@@ -19,3 +19,9 @@ rdf shell
     rdf rm <uri>                     - removes a uri
     rdf touch <uri>                  - touches a uri
 ```
+
+# Advanced
+
+When working with access control lists and client side certificates, it is possible to add a cert using the environment variable
+
+    CERT=<certificate_path>
