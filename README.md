@@ -14,7 +14,7 @@ rdf shell
     rdf cat <uri>                    - displays a uri
     rdf help                         - shows help message
     rdf ls <uri>                     - shows files in a container
-    rdf obj <uri>                    - watches the first found object
+    rdf obj <uri> [value]            - watches the first found object
     rdf patch <uri> <data>           - patch turtle data to a file
     rdf post <uri> <data>            - posts turtle data to a file
     rdf put <uri> <data>             - puts turtle data to a file

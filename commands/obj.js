@@ -10,32 +10,43 @@ var ws   = require('ws');
 */
 function obj(argv, callback) {
   var uri = argv[2];
-  var wss = 'wss://' + uri.split('/')[2] + '/';
 
-  var s = new ws(wss, {
-    origin: 'http://websocket.org'
-  });
+  if (argv[3]) {
+    util.put(argv[2], '<> <> ' + argv[3] + ' .', function(err, callback){
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('put value : ' + argv[3]);
+      }
+    });
+  } else {
+    var wss = 'wss://' + uri.split('/')[2] + '/';
 
-  s.on('open', function open() {
-    s.send('sub ' + uri);
-  });
+    var s = new ws(wss, {
+      origin: 'http://websocket.org'
+    });
 
-  s.on('close', function close() {
-    console.log('disconnected');
-  });
+    s.on('open', function open() {
+      s.send('sub ' + uri);
+    });
 
-  s.on('message', function message(data, flags) {
-    var a = data.split(' ');
-    if (a.length && a[0] === 'pub') {
-      util.getAll(a[1], function(err, res) {
-        if (err) {
-          console.error('Error : ' + err);
-        } else {
-          console.log(res[0].object.value);
-        }
-      });
-    }
-  });
+    s.on('close', function close() {
+      console.log('disconnected');
+    });
+
+    s.on('message', function message(data, flags) {
+      var a = data.split(' ');
+      if (a.length && a[0] === 'pub') {
+        util.getAll(a[1], function(err, res) {
+          if (err) {
+            console.error('Error : ' + err);
+          } else {
+            console.log(res[0].object.value);
+          }
+        });
+      }
+    });
+  }
 }
 
 
