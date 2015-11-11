@@ -29,14 +29,14 @@ var f = $rdf.fetcher(g, TIMEOUT);
 
 
 function getAny(URI, callback) {
-  f.nowOrWhenFetched(URI, undefined, function(ok, body) {
+  f.requestURI(URI, undefined, true, function(ok, body) {
     var any = g.any(null, null, null, $rdf.sym(URI));
     callback(null, any);
   });
 }
 
 function getAll(URI, callback) {
-  f.nowOrWhenFetched(URI, undefined, function(ok, body) {
+  f.requestURI(URI, undefined, true, function(ok, body) {
     var all = g.statementsMatching(null, null, null, $rdf.sym(URI));
     callback(null, all);
   });
