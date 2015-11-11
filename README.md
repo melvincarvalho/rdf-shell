@@ -17,6 +17,7 @@ rdf shell
     rdf patch <uri> <data>           - patch turtle data to a file
     rdf post <uri> <data>            - posts turtle data to a file
     rdf put <uri> <data>             - puts turtle data to a file
+    rdf sub <uri>                    - subscribes to a uri
     rdf rm <uri>                     - removes a uri
     rdf touch <uri>                  - touches a uri
 ```

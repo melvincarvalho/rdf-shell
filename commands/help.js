@@ -14,6 +14,7 @@ function help(argv, callback) {
   ret += '  rdf patch <uri> <data>           - patch turtle data to a file\n';
   ret += '  rdf post <uri> <data>            - posts turtle data to a file\n';
   ret += '  rdf put <uri> <data>             - puts turtle data to a file\n';
+  ret += '  rdf sub <uri>                    - subscribes to a uri\n';
   ret += '  rdf rm <uri>                     - removes a uri\n';
   ret += '  rdf touch <uri>                  - touches a uri\n';
   callback(null, ret);
