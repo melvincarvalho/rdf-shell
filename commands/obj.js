@@ -41,7 +41,7 @@ function obj(argv, callback) {
           if (err) {
             console.error('Error : ' + err);
           } else {
-            console.log(res[0].object.value);
+            console.log(res[res.length-1].object.value);
           }
         });
       }
