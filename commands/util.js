@@ -29,6 +29,9 @@ var f = $rdf.fetcher(g, TIMEOUT);
 
 
 function getAny(URI, callback) {
+  f.unload(URI);
+  f.refresh($rdf.sym(URI));
+  f.requested[URI] = 'unrequested';
   f.requestURI(URI, undefined, true, function(ok, body) {
     var any = g.any(null, null, null, $rdf.sym(URI));
     callback(null, any);
@@ -36,6 +39,9 @@ function getAny(URI, callback) {
 }
 
 function getAll(URI, callback) {
+  f.unload(URI);
+  f.refresh($rdf.sym(URI));
+  f.requested[URI] = 'unrequested';
   f.requestURI(URI, undefined, true, function(ok, body) {
     var all = g.statementsMatching(null, null, null, $rdf.sym(URI));
     callback(null, all);
