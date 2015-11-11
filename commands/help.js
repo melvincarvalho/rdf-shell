@@ -16,6 +16,7 @@ function help(argv, callback) {
   ret += '  rdf put <uri> <data>             - puts turtle data to a file\n';
   ret += '  rdf sub <uri>                    - subscribes to a uri\n';
   ret += '  rdf rm <uri>                     - removes a uri\n';
+  ret += '  rdf tail <uri>                   - subscribes to a uri and output on change\n';
   ret += '  rdf touch <uri>                  - touches a uri\n';
   callback(null, ret);
 }
