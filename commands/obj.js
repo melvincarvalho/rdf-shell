@@ -12,7 +12,7 @@ function obj(argv, callback) {
   var uri = argv[2];
 
   if (argv[3]) {
-    util.put(argv[2], '<> <> ' + argv[3] + ' .', function(err, callback){
+    util.put(argv[2], '<> <> """' + argv[3] + '""" .', function(err, callback){
       if (err) {
         console.error(err);
       } else {
