@@ -9,6 +9,11 @@ var ws   = require('ws');
 * @callback {bin~cb} callback
 */
 function tail(argv, callback) {
+  if (!argv[2]) {
+    console.error("url is required");
+    console.error("Usage : cat <url>");
+    process.exit(-1);
+  }
   var uri = argv[2];
   var wss = 'wss://' + uri.split('/')[2] + '/';
 
@@ -27,7 +32,7 @@ function tail(argv, callback) {
   s.on('message', function message(data, flags) {
     var a = data.split(' ');
     if (a.length && a[0] === 'pub') {
-      util.getAll(a[1], function(err, res) {
+      util.get(a[1], function(err, res) {
         if (err) {
           console.error('Error : ' + err);
         } else {

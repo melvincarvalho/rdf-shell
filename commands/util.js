@@ -191,6 +191,51 @@ function patchStorage(host, path, data, cert, callback) {
 }
 
 /**
+ * getStorage Gets data to remote storage via get request
+ * @param  {String}   host     The host to send to
+ * @param  {String}   path     The path relative to host
+ * @param  {String}   cert     Certificate path used for auth
+ * @param  {Function} callback Callback with error or response
+ */
+function getStorage(host, path, cert, callback) {
+  var protocol = 'https://';
+
+  var ldp = {
+    hostname: host,
+    rejectUnauthorized: false,
+    port:     443,
+    method:   'GET',
+    headers:  {'Content-Type': 'application/sparql-update'}
+  };
+
+  if (cert) {
+    ldp.key = fs.readFileSync(cert);
+    ldp.cert = fs.readFileSync(cert);
+  }
+
+  // put file to ldp
+  ldp.path = path;
+  debug('sending to : ' + protocol + host + path);
+  var put = https.request(ldp, function(res) {
+    chunks = '';
+    debug('STATUS: ' + res.statusCode);
+    debug('HEADERS: ' + JSON.stringify(res.headers));
+    res.on('data', function (chunk) {
+      chunks += chunk;
+    });
+    res.on('end', function (chunk) {
+      callback(null, chunks);
+    });
+  });
+
+  put.on('error', function(e) {
+    callback(e);
+  });
+
+  put.end();
+}
+
+/**
  * deleteStorage Sends turtle data to remote storage via delete request
  * @param  {String}   host     The host to send to
  * @param  {String}   path     The path relative to host
@@ -252,6 +297,12 @@ function put(uri, data, callback){
   putStorage(a.host, a.path, data, process.env.CERT, callback);
 }
 
+function get(uri, callback){
+  var a = url.parse(uri);
+  //console.log(a);
+  getStorage(a.host, a.path, process.env.CERT, callback);
+}
+
 function post(uri, data, callback){
   var a = url.parse(uri);
   //console.log(a);
@@ -260,6 +311,7 @@ function post(uri, data, callback){
 
 module.exports = {
   getAll      : getAll,
+  get         : get,
   getAny      : getAny,
   put         : put,
   rm          : rm,

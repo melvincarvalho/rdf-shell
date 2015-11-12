@@ -7,11 +7,20 @@ var util = require ('./util.js');
 * @callback {bin~cb} callback
 */
 function cat(argv, callback) {
-  util.getAll(process.argv[2], function(err, val) {
+  if (!argv[2]) {
+    console.error("url is required");
+    console.error("Usage : cat <url>");
+    process.exit(-1);
+  }
+  util.get(process.argv[2], function(err, val) {
+    console.log('run');
+    console.log(val);
+    /*
     var g = $rdf.graph();
     var sz = $rdf.Serializer(g);
     documentString = sz.statementsToN3(val);
     console.log(documentString);
+    */
   });
 }
 
