@@ -32,19 +32,34 @@ function getAny(URI, callback) {
   f.unload(URI);
   f.refresh($rdf.sym(URI));
   f.requested[URI] = 'unrequested';
-  f.requestURI(URI, undefined, true, function(ok, body) {
-    var any = g.any(null, null, null, $rdf.sym(URI));
-    callback(null, any);
+
+  get(URI, function(err, val) {
+    if (err) {
+      callback(err);
+    } else {
+      var g = $rdf.graph();
+      $rdf.parse(val, g, URI, 'text/turtle');
+      var any = g.any(null, null, null, $rdf.sym(URI));
+      callback(null, any);
+    }
   });
+
 }
 
 function getAll(URI, callback) {
   f.unload(URI);
   f.refresh($rdf.sym(URI));
   f.requested[URI] = 'unrequested';
-  f.requestURI(URI, undefined, true, function(ok, body) {
-    var all = g.statementsMatching(null, null, null, $rdf.sym(URI));
-    callback(null, all);
+
+  get(URI, function(err, val) {
+    if (err) {
+      callback(err);
+    } else {
+      var g = $rdf.graph();
+      $rdf.parse(val, g, URI, 'text/turtle');
+      var all = g.statementsMatching(null, null, null, $rdf.sym(URI));
+      callback(null, all);
+    }
   });
 }
 
