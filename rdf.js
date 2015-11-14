@@ -14,7 +14,13 @@ function rdf(argv, callback) {
     console.log('rdf help for command list');
     process.exit(-1);
   }
-  exec = require('./commands/' + command + '.js');
+
+  try {
+    exec = require('./commands/' + command + '.js');
+  } catch (err) {
+    console.error(command + ': command not found');
+    process.exit(-1);
+  }
 
   argv.splice(2, 1);
 
