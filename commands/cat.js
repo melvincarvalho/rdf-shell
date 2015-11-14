@@ -13,14 +13,7 @@ function cat(argv, callback) {
     process.exit(-1);
   }
   util.get(process.argv[2], function(err, val) {
-    console.log('run');
     console.log(val);
-    /*
-    var g = $rdf.graph();
-    var sz = $rdf.Serializer(g);
-    documentString = sz.statementsToN3(val);
-    console.log(documentString);
-    */
   });
 }
 
@@ -32,7 +25,7 @@ function cat(argv, callback) {
 * @callback {bin~cb} callback
 */
 function bin(argv) {
-  id(argv, function(err, res) {
+  cat(argv, function(err, res) {
     console.log(res);
   });
 }
