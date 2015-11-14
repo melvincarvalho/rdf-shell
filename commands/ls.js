@@ -1,5 +1,6 @@
-var util = require ('./util.js');
+#!/usr/bin/env node
 
+var util = require ('./util.js');
 
 /**
 * ls gets list of files for a given container
@@ -8,6 +9,11 @@ var util = require ('./util.js');
 * @callback {bin~cb} callback
 */
 function ls(argv, callback) {
+  if (!argv[2]) {
+    console.error("url is required");
+    console.error("Usage : ls <url>");
+    process.exit(-1);
+  }
   util.getAll(argv[2], function(err, val) {
     var res = {};
     for (var i=0; i<val.length; i++) {
@@ -54,7 +60,7 @@ function ls(argv, callback) {
 * @callback {bin~cb} callback
 */
 function bin(argv) {
-  id(argv, function(err, res) {
+  ls(argv, function(err, res) {
     console.log(res);
   });
 }
