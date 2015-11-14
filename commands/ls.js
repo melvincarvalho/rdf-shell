@@ -20,20 +20,20 @@ function ls(argv, callback) {
       if (val[i].predicate.uri === 'http://www.w3.org/ns/ldp#contains') {
         if (! res[val[i].object.uri]) res[val[i].object.uri] = {};
         res[val[i].object.uri].contains = val[i].object.uri;
-        //console.log(val[i].object.uri);
       }
       if (val[i].predicate.uri === 'http://www.w3.org/ns/posix/stat#mtime') {
         if (! res[val[i].subject.uri]) res[val[i].subject.uri] = {};
         res[val[i].subject.uri].mtime = val[i].object.value;
-        //console.log(val[i].object.value);
       }
 
     }
 
     var arr =[];
     for( var k in res ) {
-      if (res.hasOwnProperty(k)){
-        arr.push({ file : k, mtime : res[k].mtime });
+      if (res.hasOwnProperty(k)) {
+        if (k && res[k] && res[k].mtime && res[k].contains) {
+          arr.push({ file : res[k].contains, mtime : res[k].mtime });
+        }
       }
     }
 
