@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+
 var util = require ('./util.js');
 
 
@@ -11,7 +14,7 @@ var util = require ('./util.js');
 function rm(argv, callback) {
   util.rm(argv[2], function(err, val) {
     if (!err) {
-      console.log('rm to : ' + argv[2]);
+      callback(null, val, argv[2]);
     }
   });
 }
@@ -24,8 +27,8 @@ function rm(argv, callback) {
 * @callback {bin~cb} callback
 */
 function bin(argv) {
-  id(argv, function(err, res) {
-    console.log(res);
+  rm(argv, function(err, res, uri) {
+    console.log('rm of : ' + uri);
   });
 }
 

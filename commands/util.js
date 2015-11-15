@@ -239,7 +239,7 @@ function getStorage(host, path, cert, callback) {
       chunks += chunk;
     });
     res.on('end', function (chunk) {
-      callback(null, chunks);
+      callback(null, chunks, protocol + host + path);
     });
   });
 
@@ -264,7 +264,7 @@ function deleteStorage(host, path, cert, callback) {
     hostname: host,
     rejectUnauthorized: false,
     port:     443,
-    method:   'PUT',
+    method:   'DELETE',
     headers:  {'Content-Type': 'text/turtle'}
   };
 

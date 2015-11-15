@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+
 var util = require ('./util.js');
 
 /**
@@ -12,8 +15,8 @@ function cat(argv, callback) {
     console.error("Usage : cat <url>");
     process.exit(-1);
   }
-  util.get(argv[2], function(err, val) {
-    callback(null, val);
+  util.get(argv[2], function(err, val, uri) {
+    callback(null, val, uri);
   });
 }
 
@@ -25,7 +28,7 @@ function cat(argv, callback) {
 * @callback {bin~cb} callback
 */
 function bin(argv) {
-  cat(argv, function(err, res) {
+  cat(argv, function(err, res, uri) {
     console.log(res);
   });
 }
