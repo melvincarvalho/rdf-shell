@@ -12,7 +12,7 @@ function cat(argv, callback) {
     console.error("Usage : cat <url>");
     process.exit(-1);
   }
-  util.get(process.argv[2], function(err, val) {
+  util.get(argv[2], function(err, val) {
     callback(null, val);
   });
 }
