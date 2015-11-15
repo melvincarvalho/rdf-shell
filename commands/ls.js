@@ -46,9 +46,12 @@ function ls(argv, callback) {
       return 0;
     });
 
+    var ret = [];
     for (i=0; i<arr.length; i++) {
-      console.log(arr[i].file);
+      ret.push(arr[i].file);
     }
+
+    callback(null, ret);
   });
 }
 
@@ -60,8 +63,10 @@ function ls(argv, callback) {
 * @callback {bin~cb} callback
 */
 function bin(argv) {
-  ls(argv, function(err, res) {
-    console.log(res);
+  ls(argv, function(err, arr) {
+    for (i=0; i<arr.length; i++) {
+      console.log(arr[i]);
+    }
   });
 }
 

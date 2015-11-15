@@ -33,8 +33,14 @@ function rdf(argv, callback) {
 *
 */
 function bin() {
-  rdf(process.argv, function(err, res){
-    console.log(res);
+  rdf(process.argv, function(err, res) {
+    if (Array.isArray(res)) {
+      for (var i=0; i<res.length; i++) {
+        console.log(res[i]);
+      }
+    } else {
+      console.log(res);
+    }
   });
 }
 
