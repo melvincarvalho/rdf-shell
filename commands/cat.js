@@ -13,7 +13,7 @@ function cat(argv, callback) {
     process.exit(-1);
   }
   util.get(process.argv[2], function(err, val) {
-    console.log(val);
+    callback(val);
   });
 }
 
