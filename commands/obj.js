@@ -39,9 +39,9 @@ function obj(argv, callback) {
       if (a.length && a[0] === 'pub') {
         util.getAll(a[1], function(err, res) {
           if (err) {
-            console.error('Error : ' + err);
+            callback(err);
           } else {
-            console.log(res[res.length-1].object.value);
+            callback(null, res[res.length-1].object.value);
           }
         });
       }
@@ -58,7 +58,11 @@ function obj(argv, callback) {
 */
 function bin(argv) {
   obj(argv, function(err, res) {
-    console.log(res);
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(res);      
+    }
   });
 }
 
