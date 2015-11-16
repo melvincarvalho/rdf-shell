@@ -19,6 +19,7 @@ function help(argv, callback) {
   ret += '  rdf sub <uri>                    - subscribes to a uri\n';
   ret += '  rdf tail <uri>                   - watches a URI for changes\n';
   ret += '  rdf touch <uri>                  - touches a uri\n';
+  ret += '  rdf ws <uri>                     - tests websocket to a uri\n';
   callback(null, ret);
 }
 
@@ -26,7 +27,7 @@ function help(argv, callback) {
  * version as a command
  */
 function bin() {
-  help(process.argv, function(err, ret){
+  help(process.argv, function(err, ret) {
     console.log(ret);
   });
 }

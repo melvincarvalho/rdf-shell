@@ -25,6 +25,7 @@ rdf shell
     rdf sub <uri>                    - subscribes to a uri
     rdf tail <uri>                   - watches a URI for changes
     rdf touch <uri>                  - touches a uri
+    rdf ws <uri>                     - tests websocket to a uri
 ```
 
 # Advanced
