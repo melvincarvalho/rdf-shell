@@ -1,6 +1,6 @@
 {
   "name": "rdf-shell",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "utils for rdf and solid",
   "main": "rdf.js",
   "scripts": {

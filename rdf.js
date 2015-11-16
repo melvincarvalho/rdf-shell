@@ -16,7 +16,7 @@ function rdf(argv, callback) {
   }
 
   try {
-    exec = require('./commands/' + command + '.js');
+    exec = require('./bin/' + command + '.js');
   } catch (err) {
     console.error(command + ': command not found');
     process.exit(-1);
