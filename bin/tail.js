@@ -13,7 +13,7 @@ var ws   = require('ws');
 function tail(argv, callback) {
   if (!argv[2]) {
     console.error("url is required");
-    console.error("Usage : cat <url>");
+    console.error("Usage : tail <url>");
     process.exit(-1);
   }
   var uri = argv[2];
