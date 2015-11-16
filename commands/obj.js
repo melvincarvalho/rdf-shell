@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var util = require ('./util.js');
 var ws   = require('ws');
 
@@ -61,7 +63,7 @@ function bin(argv) {
     if (err) {
       console.log(err);
     } else {
-      console.log(res);      
+      console.log(res);
     }
   });
 }
