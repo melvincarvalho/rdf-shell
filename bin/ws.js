@@ -2,6 +2,7 @@
 
 var util = require ('./util.js');
 var wss  = require('ws');
+var debug = require('debug')('rdf-shell');
 
 // Sockets sometimes times out silently after 5 minutes
 var INTERVAL  = 240 * 1000;
