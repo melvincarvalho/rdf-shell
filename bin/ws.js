@@ -2,7 +2,10 @@
 
 var util = require ('./util.js');
 var wss  = require('ws');
-var INTERVAL = 60 * 1000;
+
+// Sockets sometimes times out silently after 5 minutes
+var INTERVAL  = 240 * 1000;
+var RECONNECT = 10 * 1000;
 
 
 /**
@@ -20,28 +23,38 @@ function ws(argv, callback) {
   var uri = argv[2];
   var updatesVia = 'wss://' + uri.split('/')[2] + '/';
 
-  var s = new wss(updatesVia, {
-    origin: 'http://websocket.org'
-  });
+  var s;
 
-  s.on('open', function open() {
-    var sub = 'sub ' + uri;
-    callback(null, sub);
-    s.send(sub);
-    setInterval(function() {
-      var message = 'ping';
-      callback(null, message);
-      s.send(message);
-    }, INTERVAL);
-  });
+  var connect = function(){
+    s = new wss(updatesVia, {
+      origin: 'http://websocket.org'
+    });
 
-  s.on('close', function close() {
-    callback(null, 'disconnected');
-  });
+    s.on('error', function() {
+      callback('socket error');
+      setTimeout(connect, RECONNECT);
+    });
+
+    s.on('open', function open() {
+      var sub = 'sub ' + uri;
+      callback(null, sub);
+      s.send(sub);
+
+      // periodically ping server
+      setInterval(function() {
+        var message = 'ping';
+        debug(null, message);
+        s.send(message);
+      }, INTERVAL);
+    });
+
+  };
+  connect();
 
   s.on('message', function message(data, flags) {
     callback(null, data);
   });
+
 }
 
 
