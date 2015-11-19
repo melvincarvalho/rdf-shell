@@ -24,7 +24,9 @@ function post(argv, callback) {
   }
   util.post(argv[2], argv[3], function(err, val) {
     if (!err) {
-      console.log('POST to : ' + argv[2]);
+      callback(null, argv[2]);
+    } else {
+      callback(err);
     }
   });
 }
@@ -37,8 +39,8 @@ function post(argv, callback) {
 * @callback {bin~cb} callback
 */
 function bin(argv) {
-  id(argv, function(err, res) {
-    console.log(res);
+  post(argv, function(err, res) {
+    console.log('POST to : ' + res);
   });
 }
 
