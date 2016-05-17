@@ -1,6 +1,6 @@
 {
   "name": "rdf-shell",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "description": "utils for rdf and solid",
   "main": "index.js",
   "scripts": {
@@ -18,14 +18,14 @@
     "linked",
     "data"
   ],
-  "author": "Melvin Carvalho <melvincarvalho@gmail.com> (http://melvincarvalho.com/#me)",
+  "author": "Melvin Carvalho <melvincarvalho@gmail.com> (https://melvincarvalho.com/#me)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/melvincarvalho/rdf-shell/issues"
   },
   "dependencies": {
     "debug": "^2.2.0",
-    "rdflib": "^0.2.10",
+    "rdflib": "^0.2.11",
     "ws": "^0.8.0"
   },
   "bin": {
