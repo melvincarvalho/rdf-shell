@@ -1,33 +1,23 @@
 #!/usr/bin/env node
 
-var util = require ('./util.js')
+var shell = require('../')
 
 /**
-* cat gets response for a given file
-*
-* @param {String} argv[2] url
-* @callback {bin~cb} callback
-*/
-function cat(argv, callback) {
+ * cat as a command
+ * @param  {Array} argv Args, argv[2] is the uri
+ */
+function bin(argv) {
   if (!argv[2]) {
     console.error("url is required")
     console.error("Usage : cat <url>")
     process.exit(-1)
   }
-  util.get(argv[2], function(err, val, uri) {
-    callback(null, val, uri)
-  })
-}
-
-/**
-* cat as a command
-*
-* @param {String} argv[2] login
-* @callback {bin~cb} callback
-*/
-function bin(argv) {
-  cat(argv, function(err, res, uri) {
-    console.log(res)
+  shell.cat(argv[2], function(err, res, uri) {
+    if (err) {
+      console.error(err)
+    } else {
+      console.log(res)
+    }
   })
 }
 
@@ -36,4 +26,4 @@ if (require.main === module) {
   bin(process.argv)
 }
 
-module.exports = cat
+module.exports = bin
