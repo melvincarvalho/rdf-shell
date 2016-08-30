@@ -1,40 +1,29 @@
 #!/usr/bin/env node
 
-var util = require ('./util.js');
-
-
-/**
-* patch gets list of files for a given container
-*
-* @param {String} argv[2] url
-* @param {String} argv[3] data
-* @callback {bin~cb} callback
-*/
-function patch(argv, callback) {
-  util.patch(argv[2], argv[3], function(err, val) {
-    if (!err) {
-      console.log('patch to : ' + argv[2]);
-    }
-  });
-}
-
+var shell = require ('../');
 
 /**
-* patch as a command
-*
-* @param {String} argv[2] login
-* @callback {bin~cb} callback
-*/
+ * patch a resource
+ * @param  {string} argv[2] The URI to be patched
+ * @param  {string} argv[3] The data to patch
+ */
 function bin(argv) {
-  id(argv, function(err, res) {
-    console.log(res);
-  });
+
+  var patchURI = argv[2]
+  var patch    = argv[3]
+
+  shell.patch(patchURI, patch, function(err, res) {
+    if (err) {
+      console.error(err)
+    } else {
+      console.log(res)
+    }
+  })
 }
 
 // If one import this file, this is a module, otherwise a library
 if (require.main === module) {
-  bin(process.argv);
+  bin(process.argv)
 }
 
-
-module.exports = patch;
+module.exports = bin
