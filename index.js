@@ -1,4 +1,5 @@
 module.exports = {
-  ls : require('./lib/ls'),
-  cat : require('./lib/cat')
+  cat   : require('./lib/cat'),
+  ls    : require('./lib/ls'),
+  patch : require('./lib/patch')
 }
