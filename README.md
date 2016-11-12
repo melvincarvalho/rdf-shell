@@ -15,8 +15,10 @@ rdf shell
 ```
     commands
     rdf cat <uri>                    - displays a uri
+    rdf cp <source> <dest>          - copies from source to dest uris
     rdf help                         - shows help message
     rdf ls <uri>                     - shows files in a container
+    rdf mv <scource> <dest>          - moves from source to dest uris
     rdf obj <uri> [value]            - watches the first found object
     rdf patch <uri> <data>           - patch turtle data to a file
     rdf post <uri> <data>            - posts turtle data to a file
