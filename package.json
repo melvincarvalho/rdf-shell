@@ -1,6 +1,6 @@
 {
   "name": "rdf-shell",
-  "version": "0.4.14",
+  "version": "0.5.0",
   "description": "utils for rdf and solid",
   "main": "index.js",
   "scripts": {
@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "commander": "^2.9.0",
-    "debug": "^2.2.0",
-    "rdflib": "^0.2.11",
-    "ws": "^0.8.0"
+    "debug": "^3.0.1",
+    "rdflib": "^0.16.3",
+    "ws": "^3.2.0"
   },
   "bin": {
     "rdf": "rdf.js"
